@@ -158,7 +158,7 @@ class FacePainter extends CustomPainter {
   void paint(ui.Canvas canvas, ui.Size size) {
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 12.0
+      ..strokeWidth = 10.0
       ..color = Colors.red;
 
     canvas.drawImage(image, Offset.zero, Paint());

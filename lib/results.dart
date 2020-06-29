@@ -147,7 +147,7 @@ class FacePainter extends CustomPainter {
     // canvas.scale(2);
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 12.0
+      ..strokeWidth = 10.0
       ..color = Colors.red;
 
     canvas.drawImage(image, Offset.zero, Paint());
