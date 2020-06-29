@@ -94,46 +94,51 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black45,
-      body: displayImage ? ImageAndPeople(
-        imageFile: imageFile,
-        faces: listOfFaces,
-        rect: rect
-      ) : Column(
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 2.8
-          ),
-          Center(
-            child: FlatButton.icon(
-              icon: Icon(
-                Icons.photo_camera,
-                size: 100,
-              ),
-              label: Text(''),
-              textColor: Theme.of(context).primaryColor,
-              onPressed: () async {
-                pickImageFromGallery();
-              },
+    return Container(
+//      decoration: BoxDecoration(
+//        image: DecorationImage(image: AssetImage("assets/devil-mask.jpg"),fit: BoxFit.cover)
+//      ),
+      child: Scaffold(
+        backgroundColor: Colors.black45,
+        body: displayImage ? ImageAndPeople(
+          imageFile: imageFile,
+          faces: listOfFaces,
+          rect: rect
+        ) : Column(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2.8
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 2.8
-          )
-        ],
-      ),
-      floatingActionButton: displayImage ? FloatingActionButton(
-        onPressed: () async {
-          setState(() {
-            rect.clear();            
-          });
-          pickImageFromGallery();
-        },
-        child: Icon(
-          Icons.camera_alt
+            Center(
+              child: FlatButton.icon(
+                icon: Icon(
+                  Icons.photo_camera,
+                  size: 100,
+                ),
+                label: Text(''),
+                textColor: Theme.of(context).primaryColor,
+                onPressed: () async {
+                  pickImageFromGallery();
+                },
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2.8
+            )
+          ],
         ),
-      ) : Container(),
+        floatingActionButton: displayImage ? FloatingActionButton(
+          onPressed: () async {
+            setState(() {
+              rect.clear();
+            });
+            pickImageFromGallery();
+          },
+          child: Icon(
+            Icons.camera_alt
+          ),
+        ) : Container(),
+      ),
     );
   }
 }
@@ -154,7 +159,7 @@ class FacePainter extends CustomPainter {
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 12.0
-      ..color = Colors.orange;
+      ..color = Colors.red;
 
     canvas.drawImage(image, Offset.zero, Paint());
     for (var i = 0; i < faces.length; i++) {
@@ -193,7 +198,15 @@ class ImageAndPeople extends StatelessWidget {
       var newTile = ListTile(
         title: Text(
           "Person " + i.toString(),
-          style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(fontSize: 16.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            shadows: [Shadow(
+              blurRadius: 10,
+              color: Colors.black45,
+              offset: Offset(5,5),
+            )]
+          ),
         ),
 //        subtitle: Text(
 //          item.trackingId.toString(),
@@ -221,6 +234,7 @@ class ImageAndPeople extends StatelessWidget {
           height: 2 * MediaQuery.of(context).size.height / 3,
           width: MediaQuery.of(context).size.width,
           // child: Image.file(imageFile)
+
           child: Center(
             child: FittedBox(
               child: SizedBox(
@@ -241,13 +255,24 @@ class ImageAndPeople extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(top: 10.0),
           decoration: BoxDecoration(
-            gradient: LinearGradient(
+            image: DecorationImage(
+              image: AssetImage("assets/cyberpunk.jpg"),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.red,
+                BlendMode.darken,
+              ),
+            ),
+    gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: ([Colors.red,Colors.black45.withOpacity(0.95)]),
+              colors: ([Colors.red,Colors.black45.withOpacity(0.1)]),
 
             ),
-            borderRadius: BorderRadius.only(topLeft: const Radius.circular(40.0), topRight: const Radius.circular(40.0)),
+            borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(40.0),
+                topRight: const Radius.circular(40.0)
+            ),
           ),
 
             child: ListView(

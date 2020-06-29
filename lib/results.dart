@@ -30,15 +30,35 @@ class PersonDetails extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: Icon(
-              Icons.face, color: Colors.white,
+              Icons.face,
+              color: Colors.white,
+              size: 40,
             ),
             title: Text(
               "Person " + person + "",
-              style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                fontSize: 16.5,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  shadows: [Shadow(
+                    blurRadius: 10,
+                    color: Colors.black45,
+                    offset: Offset(5,5),
+                  )]
+              ),
             ),
             subtitle: Text(
               'Smiling Probability: ' + face.smilingProbability.toStringAsFixed(4),
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white,
+                    shadows: [Shadow(
+                      blurRadius: 10,
+                      color: Colors.black45,
+                      offset: Offset(5,5),
+                    )]
+                ),
             ),
           )
         ],
@@ -77,13 +97,24 @@ class PersonDetails extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.only(top: 10.0),
                 decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/cyberpunk.jpg"),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                          Colors.red,
+                          BlendMode.darken,
+                      ),
+                  ),
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: ([Colors.red,Colors.black45.withOpacity(0.95)]),
 
                   ),
-                  borderRadius: BorderRadius.only(topLeft: const Radius.circular(40.0), topRight: const Radius.circular(40.0)),
+                  borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(40.0),
+                      topRight: const Radius.circular(40.0),
+                  ),
                 ),
                 child: detailsCard,
               )
@@ -117,7 +148,7 @@ class FacePainter extends CustomPainter {
     final Paint paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 12.0
-      ..color = Colors.orange;
+      ..color = Colors.red;
 
     canvas.drawImage(image, Offset.zero, Paint());
     canvas.drawRect(rect, paint);
